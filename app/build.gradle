@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "com.emagroup.openad.demo"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+
+    signingConfigs {
+        release {
+            keyAlias 'ema'
+            keyPassword 'ema123'
+            storeFile file('./sign/openad.jks')
+            storePassword 'ema123'
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable true
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    //fb_2/2
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile project(':openadsdk')
+}
