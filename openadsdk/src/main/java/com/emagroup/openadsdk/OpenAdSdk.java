@@ -1,13 +1,17 @@
 package com.emagroup.openadsdk;
 
+import android.app.Activity;
 import android.app.Application;
-import android.util.Log;
+
+import com.emagroup.openadsdk.impl.FaceBookImpl;
+
+import java.util.HashMap;
 
 /**
  * Created by beyearn on 2017/9/12.
  */
 
-public class OpenAdSdk extends BaseSdk {
+public class OpenAdSdk extends BaseSdk implements AdSdkInterface {
     private static OpenAdSdk mInstance;
 
     private OpenAdSdk() {
@@ -24,14 +28,25 @@ public class OpenAdSdk extends BaseSdk {
 
     public void activateApp(Application application) {
         if (isFacebook) {
+            FaceBookImpl faceBook = FaceBookImpl.getInstance();
+            faceBook.activateApp(application);
+        }
+        if (isFirebase) {
 
-            try {
-                Class<?> aClass = Class.forName("com.emagroup.openadsdk.impl.FaceBookImpl");
-                Log.e("hahh", aClass.getName());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        }
+        if (isAppsflyer) {
 
+        }
+        if (isTapjoy) {
+
+        }
+    }
+
+    @Override
+    public void adEvent(Activity activity,String event, HashMap<String, String> params) {
+        if (isFacebook) {
+            FaceBookImpl faceBook = FaceBookImpl.getInstance();
+            faceBook.adEvent(activity,event,params);
         }
         if (isFirebase) {
 
