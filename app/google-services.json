@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "708139930600",
+    "firebase_url": "https://openaddemo.firebaseio.com",
+    "project_id": "openaddemo",
+    "storage_bucket": "openaddemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:708139930600:android:e14ec920e01182fd",
+        "android_client_info": {
+          "package_name": "com.emagroup.openad.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "708139930600-8rj7t9ul0t6v801okuono7oqg8jiba85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcKfieqpsVAa0E6eqsY3fCIPuZKn_PAx8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

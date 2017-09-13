@@ -35,7 +35,12 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile project(':openadsdk')
     //fb_2/2
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile project(':openadsdk')
+    //firebase
+    compile 'com.google.firebase:firebase-core:10.2.6'
 }
+
+// firebase
+apply plugin: 'com.google.gms.google-services'

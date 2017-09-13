@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.emagroup.openadsdk.OpenAdSdk;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.HashMap;
 
@@ -33,6 +34,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         logger.logEvent(AppEventsConstants.EVENT_NAME_ADDED_TO_CART,
                 parameters);*/
+
+
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1123");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "1123hha");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
     }
 

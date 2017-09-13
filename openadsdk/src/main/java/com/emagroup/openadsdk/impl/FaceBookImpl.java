@@ -13,13 +13,13 @@ import java.util.HashMap;
  * Created by beyearn on 2017/9/12.
  */
 
-public class FaceBookImpl implements AdSdkInterface {
+public class FacebookImpl implements AdSdkInterface {
 
-    private static FaceBookImpl mInstance;
+    private static FacebookImpl mInstance;
 
-    public static FaceBookImpl getInstance() {
+    public static FacebookImpl getInstance() {
         if (mInstance == null) {
-            mInstance = new FaceBookImpl();
+            mInstance = new FacebookImpl();
         }
         return mInstance;
     }
@@ -39,6 +39,12 @@ public class FaceBookImpl implements AdSdkInterface {
         }
     }
 
+    /**
+     * 在事件发生处调用
+     * @param activity
+     * @param event
+     * @param params
+     */
     @Override
     public void adEvent(Activity activity, String event, HashMap<String, String> params) {
         try {

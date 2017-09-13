@@ -17,7 +17,7 @@ public class BaseSdk {
 
     BaseSdk() {
         try {
-            InputStream adConfStream = getClass().getResourceAsStream("/assets/openad.properties");     //context.getAssets().open("test.properties"); 这种方法需要context
+            InputStream adConfStream = getClass().getResourceAsStream("/assets/openad.config");     //context.getAssets().open("test.properties"); 这种方法需要context
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(adConfStream));
             String line;
             while ((line = bufferedReader.readLine()) != null) {

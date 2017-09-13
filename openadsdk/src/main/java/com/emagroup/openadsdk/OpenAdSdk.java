@@ -3,7 +3,8 @@ package com.emagroup.openadsdk;
 import android.app.Activity;
 import android.app.Application;
 
-import com.emagroup.openadsdk.impl.FaceBookImpl;
+import com.emagroup.openadsdk.impl.FacebookImpl;
+import com.emagroup.openadsdk.impl.FirebaseImpl;
 
 import java.util.HashMap;
 
@@ -28,7 +29,7 @@ public class OpenAdSdk extends BaseSdk implements AdSdkInterface {
 
     public void activateApp(Application application) {
         if (isFacebook) {
-            FaceBookImpl faceBook = FaceBookImpl.getInstance();
+            FacebookImpl faceBook = FacebookImpl.getInstance();
             faceBook.activateApp(application);
         }
         if (isFirebase) {
@@ -45,11 +46,11 @@ public class OpenAdSdk extends BaseSdk implements AdSdkInterface {
     @Override
     public void adEvent(Activity activity,String event, HashMap<String, String> params) {
         if (isFacebook) {
-            FaceBookImpl faceBook = FaceBookImpl.getInstance();
+            FacebookImpl faceBook = FacebookImpl.getInstance();
             faceBook.adEvent(activity,event,params);
         }
         if (isFirebase) {
-
+            FirebaseImpl.getInstance().adEvent(activity,event,params);
         }
         if (isAppsflyer) {
 
