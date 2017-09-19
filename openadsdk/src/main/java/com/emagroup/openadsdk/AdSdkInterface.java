@@ -26,10 +26,10 @@ public interface AdSdkInterface {
 
 
 
-    void onStart();
+    void onStart(Activity activity);
 
 
-    void onStop();
+    void onStop(Activity activity);
 
 
     /**

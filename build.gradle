@@ -19,6 +19,12 @@ allprojects {
         jcenter()
         //fb_1/2
         mavenCentral()
+
+        //tapjoy
+        maven {
+            name "Tapjoy's maven repo"
+            url "https://tapjoy.bintray.com/maven"
+        }
     }
 }
 

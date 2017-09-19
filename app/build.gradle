@@ -42,6 +42,8 @@ dependencies {
     compile 'com.google.firebase:firebase-core:10.2.6'
     //appsflyer
     compile 'com.appsflyer:af-android-sdk:4.8.0@aar'
+    //tapjoy
+    compile 'com.tapjoy:tapjoy-android-sdk:11.11.0@aar'
 }
 
 // firebase

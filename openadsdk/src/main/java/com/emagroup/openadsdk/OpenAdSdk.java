@@ -18,10 +18,10 @@ import java.util.HashMap;
 
 public class OpenAdSdk implements AdSdkInterface {
     private static OpenAdSdk mInstance;
-    private boolean isFirebase;
-    private boolean isAppsflyer;
-    private boolean isTapjoy;
-    private boolean isFacebook;
+    private boolean isFirebase = false;
+    private boolean isAppsflyer = false;
+    private boolean isTapjoy = false;
+    private boolean isFacebook = false;
 
     private OpenAdSdk() {
         try {
@@ -31,13 +31,13 @@ public class OpenAdSdk implements AdSdkInterface {
             while ((line = bufferedReader.readLine()) != null) {
                 if (!line.startsWith(";")) {
                     //用来判定需要接入哪几个渠道
-                    if (line.contains("facebook")) {
+                    if (line.equals("facebook")) {
                         isFacebook = true;
-                    } else if (line.contains("firebase")) {
+                    } else if (line.equals("firebase")) {
                         isFirebase = true;
-                    } else if (line.contains("appsflyer")) {
+                    } else if (line.equals("appsflyer")) {
                         isAppsflyer = true;
-                    } else if (line.contains("tapjoy")) {
+                    } else if (line.equals("tapjoy")) {
                         isTapjoy = true;
                     }
                 }
@@ -90,7 +90,7 @@ public class OpenAdSdk implements AdSdkInterface {
     }
 
     @Override
-    public void onStart() {
+    public void onStart(Activity activity) {
         if (isFacebook) {
             //不需用
         }
@@ -106,7 +106,7 @@ public class OpenAdSdk implements AdSdkInterface {
     }
 
     @Override
-    public void onStop() {
+    public void onStop(Activity activity) {
         if (isFacebook) {
             //不需用
         }

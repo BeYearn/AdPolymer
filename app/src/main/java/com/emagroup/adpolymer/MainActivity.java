@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.emagroup.openadsdk.OpenAdSdk;
+import com.tapjoy.Tapjoy;
 
 import java.util.HashMap;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        OpenAdSdk.getInstance().activateActivity(this);
 
         btCreatCount = (Button) findViewById(R.id.bt_creat_account);
 
@@ -76,10 +78,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String appsFlyerId = AppsFlyerLib.getInstance().getAppsFlyerUID(this);*/
 
 
-        //Tapjoy.connect(this.getApplicationContext(), "d-XDJk7ORiSARxySkrUGIwEC6PHleqX9FxW7Qzmde3rMfUV-BKKD4CF7eC78", new Hashtable(), this);
+        Tapjoy.connect(this.getApplicationContext(), "d-XDJk7ORiSARxySkrUGIwEC6PHleqX9FxW7Qzmde3rMfUV-BKKD4CF7eC78");
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        OpenAdSdk.getInstance().onStart(this);
+        //Tapjoy.onActivityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        OpenAdSdk.getInstance().onStop(this);
+    }
 
     @Override
     public void onClick(View v) {

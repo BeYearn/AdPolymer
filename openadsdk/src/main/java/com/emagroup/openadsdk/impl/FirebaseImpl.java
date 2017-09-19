@@ -35,12 +35,12 @@ public class FirebaseImpl extends BaseSdk {
     }
 
     @Override
-    public void onStart() {
+    public void onStart(Activity activity) {
 
     }
 
     @Override
-    public void onStop() {
+    public void onStop(Activity activity) {
 
     }
 
