@@ -15,7 +15,21 @@ public interface AdSdkInterface {
      *
      * @param application
      */
-    void activateApp(Application application);
+    void activateApplication(Application application);
+
+
+    /**
+     * 在activity 的 oncreate 中调用
+     * @param activity
+     */
+    void activateActivity(Activity activity);
+
+
+
+    void onStart();
+
+
+    void onStop();
 
 
     /**

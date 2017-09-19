@@ -28,17 +28,65 @@ public class OpenAdSdk extends BaseSdk implements AdSdkInterface {
     }
 
 
-    public void activateApp(Application application) {
+    public void activateApplication(Application application) {
         if (isFacebook) {
             FacebookImpl faceBook = FacebookImpl.getInstance();
-            faceBook.activateApp(application);
+            faceBook.activateApplication(application);
         }
         if (isFirebase) {
             //不需用
         }
         if (isAppsflyer) {
             AppsflyerImpl appsflyer = AppsflyerImpl.getInstance();
-            appsflyer.activateApp(application);
+            appsflyer.activateApplication(application);
+        }
+        if (isTapjoy) {
+            //不需用
+        }
+    }
+
+    @Override
+    public void activateActivity(Activity activity) {
+        if (isFacebook) {
+            //不需用
+        }
+        if (isFirebase) {
+            //不需用
+        }
+        if (isAppsflyer) {
+            //不需用
+        }
+        if (isTapjoy) {
+
+        }
+    }
+
+    @Override
+    public void onStart() {
+        if (isFacebook) {
+            //不需用
+        }
+        if (isFirebase) {
+            //不需用
+        }
+        if (isAppsflyer) {
+            //不需用
+        }
+        if (isTapjoy) {
+
+        }
+    }
+
+    @Override
+    public void onStop() {
+        if (isFacebook) {
+            //不需用
+        }
+        if (isFirebase) {
+            //不需用
+        }
+        if (isAppsflyer) {
+            //不需用
         }
         if (isTapjoy) {
 

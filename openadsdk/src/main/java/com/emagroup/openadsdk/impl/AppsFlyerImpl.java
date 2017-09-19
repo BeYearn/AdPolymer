@@ -32,7 +32,7 @@ public class AppsflyerImpl implements AdSdkInterface {
     }
 
     @Override
-    public void activateApp(Application application) {
+    public void activateApplication(Application application) {
         try {
 
             Class<?> classListener = Class.forName("com.appsflyer.AppsFlyerConversionListener");
@@ -51,6 +51,21 @@ public class AppsflyerImpl implements AdSdkInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void activateActivity(Activity activity) {
+
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     /**

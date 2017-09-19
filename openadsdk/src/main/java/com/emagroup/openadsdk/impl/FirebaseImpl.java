@@ -25,8 +25,23 @@ public class FirebaseImpl implements AdSdkInterface {
     }
 
     @Override
-    public void activateApp(Application application) {
+    public void activateApplication(Application application) {
         //firebase 的分析 无需在application中初始化
+    }
+
+    @Override
+    public void activateActivity(Activity activity) {
+
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     @Override

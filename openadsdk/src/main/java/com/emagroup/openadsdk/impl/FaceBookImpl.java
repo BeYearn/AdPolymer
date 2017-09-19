@@ -30,13 +30,28 @@ public class FacebookImpl implements AdSdkInterface {
      * @param application
      */
     @Override
-    public void activateApp(Application application) {
+    public void activateApplication(Application application) {
         try {
             Class<?> aClass = Class.forName("com.facebook.appevents.AppEventsLogger");
             aClass.getMethod("activateApp", Application.class).invoke(null, application);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void activateActivity(Activity activity) {
+
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onStop() {
+
     }
 
     /**

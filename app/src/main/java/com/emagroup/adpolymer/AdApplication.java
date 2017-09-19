@@ -12,7 +12,7 @@ public class AdApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        OpenAdSdk.getInstance().activateApp(this);
+        OpenAdSdk.getInstance().activateApplication(this);
     }
 
 }
