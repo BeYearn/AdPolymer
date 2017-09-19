@@ -8,32 +8,30 @@ import java.io.InputStreamReader;
  * Created by beyearn on 2017/9/12.
  */
 
-public class BaseSdk {
+public abstract class BaseSdk implements AdSdkInterface {
 
-    public boolean isFirebase = false;
-    public boolean isTapjoy = false;
-    public boolean isAppsflyer = false;
-    public boolean isFacebook = false;
+    public String facebookId;
+    public String appsflyerId;
+    public String tapjoyId;
 
-    BaseSdk() {
+    public BaseSdk() {
         try {
             InputStream adConfStream = getClass().getResourceAsStream("/assets/openad.config");     //context.getAssets().open("test.properties"); 这种方法需要context
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(adConfStream));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 if (!line.startsWith(";")) {
-
-                    if (line.contains("facebook")) {
-                        isFacebook = true;
-                    } else if (line.contains("firebase")) {
-                        isFirebase = true;
-                    } else if (line.contains("appsflyer")) {
-                        isAppsflyer = true;
-                    } else if (line.contains("tapjoy")) {
-                        isTapjoy = true;
+                    //用来获取渠道参数
+                    if(line.contains("facebookAppId=")){
+                        String[] split = line.split("facebookAppId=");              //会分成""和后面的id
+                        facebookId = split[1].trim();
+                    }else if(line.contains("appsflyerAppId=")){
+                        String[] split = line.split("appsflyerAppId=");
+                        appsflyerId = split[1].trim();
+                    }else if(line.contains("tapjoyAppId=")){
+                        String[] split = line.split("tapjoyAppId=");
+                        tapjoyId = split[1].trim();
                     }
-
-
 
                 }
             }
@@ -42,4 +40,5 @@ public class BaseSdk {
             e.printStackTrace();
         }
     }
+
 }

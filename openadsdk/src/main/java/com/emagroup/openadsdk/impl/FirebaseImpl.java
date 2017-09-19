@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.emagroup.openadsdk.AdSdkInterface;
+import com.emagroup.openadsdk.BaseSdk;
 
 import java.util.HashMap;
 
@@ -13,7 +13,7 @@ import java.util.HashMap;
  * Created by beyearn on 2017/9/13.
  */
 
-public class FirebaseImpl implements AdSdkInterface {
+public class FirebaseImpl extends BaseSdk {
 
     private static FirebaseImpl mInstance;
 

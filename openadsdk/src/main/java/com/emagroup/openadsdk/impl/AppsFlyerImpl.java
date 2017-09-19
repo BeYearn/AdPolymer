@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.emagroup.openadsdk.AdSdkInterface;
+import com.emagroup.openadsdk.BaseSdk;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -19,10 +19,11 @@ import static android.content.ContentValues.TAG;
  * Created by beyearn on 2017/9/14.
  */
 
-public class AppsflyerImpl implements AdSdkInterface {
+public class AppsflyerImpl extends BaseSdk {
 
 
     private static AppsflyerImpl mInstance;
+
 
     public static AppsflyerImpl getInstance() {
         if (mInstance == null) {
@@ -43,7 +44,7 @@ public class AppsflyerImpl implements AdSdkInterface {
             Object listener = Proxy.newProxyInstance(AppsflyerImpl.class.getClassLoader(),
                     new Class[]{classListener}, new AfListenerImpl());
 
-            classAppsFlyerLib.getMethod("init", String.class, classListener).invoke(instance, "appflyerkey", listener);
+            classAppsFlyerLib.getMethod("init", String.class, classListener).invoke(instance, appsflyerId, listener);
 
             //就绪后开始track
             classAppsFlyerLib.getMethod("startTracking", Application.class).invoke(instance, application);
@@ -71,9 +72,9 @@ public class AppsflyerImpl implements AdSdkInterface {
     /**
      * @param activity
      * @param eventName 限制45个字符
-     * @param params   如果事件需要统计收益(revenue), 那么请务必使用af_revenue作为指定的key(其余可选/可自定义)
-     *
-     *                 **遍历中不可增,删的话得用map.entrySet().iterator()的it的remove,改的话均可
+     * @param params    如果事件需要统计收益(revenue), 那么请务必使用af_revenue作为指定的key(其余可选/可自定义)
+     *                  <p>
+     *                  **遍历中不可增,删的话得用map.entrySet().iterator()的it的remove,改的话均可
      */
     @Override
     public void adEvent(Activity activity, String eventName, HashMap<String, String> params) {

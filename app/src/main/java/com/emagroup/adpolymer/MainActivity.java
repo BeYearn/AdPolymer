@@ -25,7 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btCreatCount.setOnClickListener(this);
 
 
-        /*AppEventsLogger logger = AppEventsLogger.newLogger(this);
+        /*AppEventsLogger.activateApp(this.getApplication(),"appid");
+
+        AppEventsLogger logger = AppEventsLogger.newLogger(this);
         Bundle parameters = new Bundle();
         parameters.putString(AppEventsConstants.EVENT_PARAM_CURRENCY, "USD");
         parameters.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "product");
@@ -72,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eventValue.put(AFInAppEventParameterName.SCORE,100);
         AppsFlyerLib.getInstance().trackEvent(this, AFInAppEventType.LEVEL_ACHIEVED,eventValue);
         String appsFlyerId = AppsFlyerLib.getInstance().getAppsFlyerUID(this);*/
+
+
+        //Tapjoy.connect(this.getApplicationContext(), "d-XDJk7ORiSARxySkrUGIwEC6PHleqX9FxW7Qzmde3rMfUV-BKKD4CF7eC78", new Hashtable(), this);
 
     }
 

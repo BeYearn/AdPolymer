@@ -7,17 +7,45 @@ import com.emagroup.openadsdk.impl.AppsflyerImpl;
 import com.emagroup.openadsdk.impl.FacebookImpl;
 import com.emagroup.openadsdk.impl.FirebaseImpl;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
  * Created by beyearn on 2017/9/12.
  */
 
-public class OpenAdSdk extends BaseSdk implements AdSdkInterface {
+public class OpenAdSdk implements AdSdkInterface {
     private static OpenAdSdk mInstance;
+    private boolean isFirebase;
+    private boolean isAppsflyer;
+    private boolean isTapjoy;
+    private boolean isFacebook;
 
     private OpenAdSdk() {
-        super();  //父类的构造方法是无参数的，那么在子类中写不写都可以，不写的话会隐式地调用;父类的构造方法是带参数的且没有午餐构造的 必须显示调用
+        try {
+            InputStream adConfStream = getClass().getResourceAsStream("/assets/openad.config");     //context.getAssets().open("test.properties"); 这种方法需要context
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(adConfStream));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                if (!line.startsWith(";")) {
+                    //用来判定需要接入哪几个渠道
+                    if (line.contains("facebook")) {
+                        isFacebook = true;
+                    } else if (line.contains("firebase")) {
+                        isFirebase = true;
+                    } else if (line.contains("appsflyer")) {
+                        isAppsflyer = true;
+                    } else if (line.contains("tapjoy")) {
+                        isTapjoy = true;
+                    }
+                }
+            }
+            bufferedReader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static OpenAdSdk getInstance() {
@@ -94,16 +122,16 @@ public class OpenAdSdk extends BaseSdk implements AdSdkInterface {
     }
 
     @Override
-    public void adEvent(Activity activity,String event, HashMap<String, String> params) {
+    public void adEvent(Activity activity, String event, HashMap<String, String> params) {
         if (isFacebook) {
             FacebookImpl faceBook = FacebookImpl.getInstance();
-            faceBook.adEvent(activity,event,params);
+            faceBook.adEvent(activity, event, params);
         }
         if (isFirebase) {
-            FirebaseImpl.getInstance().adEvent(activity,event,params);
+            FirebaseImpl.getInstance().adEvent(activity, event, params);
         }
         if (isAppsflyer) {
-            AppsflyerImpl.getInstance().adEvent(activity,event,params);
+            AppsflyerImpl.getInstance().adEvent(activity, event, params);
         }
         if (isTapjoy) {
 

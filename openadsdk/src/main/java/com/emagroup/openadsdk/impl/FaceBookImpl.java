@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.emagroup.openadsdk.AdSdkInterface;
+import com.emagroup.openadsdk.BaseSdk;
 
 import java.util.HashMap;
 
@@ -13,10 +13,11 @@ import java.util.HashMap;
  * Created by beyearn on 2017/9/12.
  */
 
-public class FacebookImpl implements AdSdkInterface {
+public class FacebookImpl extends BaseSdk {
 
     private static FacebookImpl mInstance;
 
+    ////父类的构造方法是无参数的，那么在子类中写不写都可以，不写的话会隐式地调用;父类的构造方法是带参数的且没有午餐构造的 必须显示调用
     public static FacebookImpl getInstance() {
         if (mInstance == null) {
             mInstance = new FacebookImpl();
@@ -33,7 +34,7 @@ public class FacebookImpl implements AdSdkInterface {
     public void activateApplication(Application application) {
         try {
             Class<?> aClass = Class.forName("com.facebook.appevents.AppEventsLogger");
-            aClass.getMethod("activateApp", Application.class).invoke(null, application);
+            aClass.getMethod("activateApp", Application.class, String.class).invoke(null, application, facebookId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,6 +57,7 @@ public class FacebookImpl implements AdSdkInterface {
 
     /**
      * 在事件发生处调用
+     *
      * @param activity
      * @param event
      * @param params
