@@ -1,5 +1,9 @@
 package com.emagroup.openadsdk;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Environment;
 
 import java.io.BufferedReader;
@@ -13,17 +17,7 @@ import java.io.IOException;
  *
  * @author beyearn
  */
-public class SdCardUtils {
-
-
-    /**
-     * 使用
-     */
-    //String s = SdCardUtils.readFromSdcard("/emasdk/", "4568.log");   // sd卡下/emasdk/4562.log
-    //JSONObject json = new JSONObject(s);   //得到jsonObject对象 可进一步操作
-
-
-
+public class Utils {
 
     /**
      * 用于读取sdcard的数据
@@ -61,6 +55,28 @@ public class SdCardUtils {
 
         }
         return stringBuilder.toString();
+    }
+
+
+    /**
+     * 获取清单文件中 meta-data的值
+     *
+     * @param context
+     * @param metaDataName
+     * @return
+     */
+    public static String getMetaDataValue(Context context, String metaDataName) {
+        PackageManager pm = context.getPackageManager();
+        ApplicationInfo appinfo;
+        String metaDataValue = "";
+        try {
+            appinfo = pm.getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            Bundle metaData = appinfo.metaData;
+            metaDataValue = metaData.getString(metaDataName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return metaDataValue;
     }
 
 

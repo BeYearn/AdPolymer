@@ -3,4 +3,5 @@
 
     <!--各平台需要的配置-->
     <string name="facebook_app_id">1919443161709104</string>
+    <string name="appsflyer_app_key">1919443161709104</string>
 </resources>

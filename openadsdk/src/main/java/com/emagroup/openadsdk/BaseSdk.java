@@ -33,6 +33,8 @@ public class BaseSdk {
                         isTapjoy = true;
                     }
 
+
+
                 }
             }
             bufferedReader.close();

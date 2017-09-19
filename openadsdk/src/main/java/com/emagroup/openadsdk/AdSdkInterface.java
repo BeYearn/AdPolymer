@@ -10,7 +10,20 @@ import java.util.HashMap;
  */
 
 public interface AdSdkInterface {
+    /**
+     * 在application 的 oncreate中调用
+     *
+     * @param application
+     */
     void activateApp(Application application);
 
-    void adEvent(Activity activity,String event, HashMap<String, String> params);
+
+    /**
+     * 增加事件
+     *
+     * @param activity
+     * @param event
+     * @param params
+     */
+    void adEvent(Activity activity, String event, HashMap<String, String> params);
 }

@@ -3,6 +3,7 @@ package com.emagroup.openadsdk;
 import android.app.Activity;
 import android.app.Application;
 
+import com.emagroup.openadsdk.impl.AppsflyerImpl;
 import com.emagroup.openadsdk.impl.FacebookImpl;
 import com.emagroup.openadsdk.impl.FirebaseImpl;
 
@@ -33,10 +34,11 @@ public class OpenAdSdk extends BaseSdk implements AdSdkInterface {
             faceBook.activateApp(application);
         }
         if (isFirebase) {
-
+            //不需用
         }
         if (isAppsflyer) {
-
+            AppsflyerImpl appsflyer = AppsflyerImpl.getInstance();
+            appsflyer.activateApp(application);
         }
         if (isTapjoy) {
 
@@ -53,7 +55,7 @@ public class OpenAdSdk extends BaseSdk implements AdSdkInterface {
             FirebaseImpl.getInstance().adEvent(activity,event,params);
         }
         if (isAppsflyer) {
-
+            AppsflyerImpl.getInstance().adEvent(activity,event,params);
         }
         if (isTapjoy) {
 
