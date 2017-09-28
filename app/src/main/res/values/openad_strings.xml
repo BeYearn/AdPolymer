@@ -1,0 +1,11 @@
+<resources>
+    <!--接入哪些渠道-->
+    <bool name="facebook">true</bool>
+    <bool name="firebase">true</bool>
+    <bool name="appsflyer">true</bool>
+    <bool name="tapjoy">true</bool>
+
+
+    <!--渠道需要的配置-->
+    <string name="facebook_app_id">1919443161709104</string>
+</resources>

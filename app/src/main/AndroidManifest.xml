@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
 
-        <!--facebook 神奇的初始化 非要这样才行 配置文件中暂时那样吧-->
+        <!--facebook 神奇的初始化 非要这样的组合(在value中声明,在这里引用)才行-->
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
         <!--tapjoy-->

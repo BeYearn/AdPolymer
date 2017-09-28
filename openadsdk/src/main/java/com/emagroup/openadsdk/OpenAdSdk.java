@@ -25,6 +25,9 @@ public class OpenAdSdk implements AdSdkInterface {
 
     private OpenAdSdk() {
         try {
+
+            // todo 使用openad_string.xml的方式来读,不用读文件了
+
             InputStream adConfStream = getClass().getResourceAsStream("/assets/openad.config");     //context.getAssets().open("test.properties"); 这种方法需要context
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(adConfStream));
             String line;
@@ -43,6 +46,8 @@ public class OpenAdSdk implements AdSdkInterface {
                 }
             }
             bufferedReader.close();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -121,6 +126,12 @@ public class OpenAdSdk implements AdSdkInterface {
         }
     }
 
+    /**
+     *
+     * @param activity
+     * @param event 事件名称
+     * @param params 参数 可为null
+     */
     @Override
     public void adEvent(Activity activity, String event, HashMap<String, String> params) {
         if (isFacebook) {

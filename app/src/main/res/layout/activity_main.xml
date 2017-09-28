@@ -4,11 +4,36 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.emagroup.adpolymer.MainActivity">
 
-    <Button
-        android:id="@+id/bt_creat_account"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_param_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="创建角色" />
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_event_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="事件名称" />
+
+        <Button
+            android:id="@+id/bt_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="20dp"
+            android:text="提交" />
+    </RelativeLayout>
+
+
 </LinearLayout>

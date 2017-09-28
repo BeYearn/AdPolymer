@@ -3,6 +3,7 @@ package com.emagroup.openadsdk.impl;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.emagroup.openadsdk.BaseSdk;
@@ -77,14 +78,16 @@ public class AppsflyerImpl extends BaseSdk {
      *                  **遍历中不可增,删的话得用map.entrySet().iterator()的it的remove,改的话均可
      */
     @Override
-    public void adEvent(Activity activity, String eventName, HashMap<String, String> params) {
+    public void adEvent(Activity activity, @NonNull String eventName, HashMap<String, String> params) {
         try {
             HashMap<String, String> newParams = new HashMap<>();
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                if (entry.getKey().equals("////////预定义的支付金额的字段////////")) {
-                    params.put("af_revenue", entry.getValue());
-                } else {
-                    newParams.put(entry.getKey(), entry.getValue());
+            if (params != null) {
+                for (Map.Entry<String, String> entry : params.entrySet()) {
+                    if (entry.getKey().equals("////////预定义的支付金额的字段////////")) {
+                        newParams.put("af_revenue", entry.getValue());
+                    } else {
+                        newParams.put(entry.getKey(), entry.getValue());
+                    }
                 }
             }
 

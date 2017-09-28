@@ -2,8 +2,14 @@ package com.emagroup.adpolymer;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.emagroup.openadsdk.OpenAdSdk;
 import com.tapjoy.Tapjoy;
@@ -12,7 +18,11 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btCreatCount;
+    private Button btSubmit;
+    private Button btAddParam;
+    private LayoutInflater layoutInflater;
+    private LinearLayout llParamLayout;
+    private EditText etEventName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +31,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         OpenAdSdk.getInstance().activateActivity(this);
 
-        btCreatCount = (Button) findViewById(R.id.bt_creat_account);
+        btSubmit = (Button) findViewById(R.id.bt_submit);
+        etEventName = (EditText) findViewById(R.id.et_event_name);
+        llParamLayout = (LinearLayout) findViewById(R.id.ll_param_content);
 
+        btSubmit.setOnClickListener(this);
 
-        btCreatCount.setOnClickListener(this);
+        layoutInflater = LayoutInflater.from(this.getApplicationContext());
 
-
+        addAParam();
         /*AppEventsLogger.activateApp(this.getApplication(),"appid");
 
         AppEventsLogger logger = AppEventsLogger.newLogger(this);
@@ -98,13 +111,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bt_creat_account:
+            case R.id.bt_add_param:
+                addAParam();
+                break;
 
-                HashMap<String, String> map = new HashMap<>();
-                map.put("account_name", "demoAccount");
-                OpenAdSdk.getInstance().adEvent(this,"ad_create_role", map);
+            case R.id.bt_submit:
 
+                commitEvent();
                 break;
         }
+    }
+
+
+    private void commitEvent() {
+        HashMap<String, String> map = new HashMap<>();
+        String eventName = etEventName.getText().toString();
+        if (TextUtils.isEmpty(eventName)) {
+            Toast.makeText(this, "请输入事件名称", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        for (int i = 0; i < llParamLayout.getChildCount(); i++) {
+            View childAt = llParamLayout.getChildAt(i);
+            EditText etParamKey = (EditText) childAt.findViewById(R.id.et_param_key);
+            EditText etParamValue = (EditText) childAt.findViewById(R.id.et_param_value);
+
+            String paramKey = etParamKey.getText().toString();
+            String paramValue = etParamValue.getText().toString();
+
+            if (!TextUtils.isEmpty(paramKey)) {
+                map.put(paramKey, paramValue);
+            }
+        }
+
+        //HashMap<String, String> temp = new HashMap<>();
+        //temp.put("account_name", "demoAccount");
+        //OpenAdSdk.getInstance().adEvent(this,"ad_create_role", temp);
+        OpenAdSdk.getInstance().adEvent(this,eventName, map);
+
+    }
+
+
+    private void addAParam() {
+        if (null != btAddParam) {
+            btAddParam.setVisibility(View.GONE);
+        }
+
+        View view = layoutInflater.inflate(R.layout.layout_param_content, null);
+
+        btAddParam = (Button) view.findViewById(R.id.bt_add_param);
+
+        btAddParam.setOnClickListener(this);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        llParamLayout.addView(view, layoutParams);
+
     }
 }

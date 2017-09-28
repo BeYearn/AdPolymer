@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.emagroup.openadsdk.BaseSdk;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by beyearn on 2017/9/13.
@@ -45,13 +47,18 @@ public class FirebaseImpl extends BaseSdk {
     }
 
     @Override
-    public void adEvent(Activity activity, String event, HashMap<String, String> params) {
+    public void adEvent(Activity activity, @NonNull String event, HashMap<String, String> params) {
         try {
             Class<?> aClass = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
             Object instance = aClass.getMethod("getInstance", Context.class).invoke(null, activity);
 
             Bundle bundle = new Bundle();
-            bundle.putString("account_name", params.get("account_name"));
+            if (params != null) {
+                for (Map.Entry<String, String> entry : params.entrySet()) {
+                    bundle.putString(entry.getKey(), entry.getValue());
+                }
+            }
+
             aClass.getMethod("logEvent", String.class, Bundle.class).invoke(instance, event, bundle);    // firebase的参数bundle并非可选参数
 
         } catch (Exception e) {
