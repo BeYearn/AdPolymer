@@ -1,8 +1,11 @@
 package com.emagroup.adpolymer;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +38,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etEventName = (EditText) findViewById(R.id.et_event_name);
         llParamLayout = (LinearLayout) findViewById(R.id.ll_param_content);
 
+        findViewById(R.id.bt_dispatch_ac).setOnClickListener(this);
+
         btSubmit.setOnClickListener(this);
 
         layoutInflater = LayoutInflater.from(this.getApplicationContext());
+
+        Log.e("aaa","aaa");
 
         addAParam();
         /*AppEventsLogger.activateApp(this.getApplication(),"appid");
@@ -118,6 +125,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bt_submit:
 
                 commitEvent();
+                break;
+            case R.id.bt_dispatch_ac:
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_DEFAULT);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
+                intent.setData(Uri.parse("polymer://yby.com"));
+                startActivity(intent);
+
+                /*Intent intent = new Intent(this, DeepLinkDispatchActivity.class);
+                startActivity(intent);*/
+
                 break;
         }
     }
