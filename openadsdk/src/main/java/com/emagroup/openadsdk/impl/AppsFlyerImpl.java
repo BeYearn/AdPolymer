@@ -49,7 +49,6 @@ public class AppsflyerImpl extends BaseSdk {
 
             //就绪后开始track
             classAppsFlyerLib.getMethod("startTracking", Application.class).invoke(instance, application);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,7 +77,7 @@ public class AppsflyerImpl extends BaseSdk {
      *                  **遍历中不可增,删的话得用map.entrySet().iterator()的it的remove,改的话均可
      */
     @Override
-    public void adEvent(Activity activity, @NonNull String eventName, HashMap<String, String> params) {
+    public void adEvent(Activity activity, HashMap<String, Boolean> channels, @NonNull String eventName, HashMap<String, String> params) {
         try {
             HashMap<String, String> newParams = new HashMap<>();
             if (params != null) {
@@ -87,6 +86,7 @@ public class AppsflyerImpl extends BaseSdk {
                         newParams.put("af_revenue", entry.getValue());
                     } else {
                         newParams.put(entry.getKey(), entry.getValue());
+                        Log.e("appsflyerAD:",entry.getKey()+" : "+entry.getValue());
                     }
                 }
             }
@@ -95,6 +95,10 @@ public class AppsflyerImpl extends BaseSdk {
             Object instance = aClass.getMethod("getInstance").invoke(null);
             aClass.getMethod("trackEvent", Context.class, String.class, Map.class).invoke(instance, activity.getApplicationContext(), eventName, newParams);
 
+            /*Map<String, Object> eventValue = new HashMap<String, Object>();
+            eventValue.put("level",9);
+            eventValue.put("score",100);
+            AppsFlyerLib.getInstance().trackEvent(activity.getApplicationContext(),"level_bbb",eventValue);*/
         } catch (Exception e) {
             e.printStackTrace();
         }
