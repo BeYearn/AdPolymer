@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.emagroup.openadsdk.AdConstants;
 import com.emagroup.openadsdk.OpenAdSdk;
 import com.tapjoy.Tapjoy;
 
@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btSubmit.setOnClickListener(this);
 
         layoutInflater = LayoutInflater.from(this.getApplicationContext());
-
-        Log.e("aaa","aaa");
 
         addAParam();
         /*AppEventsLogger.activateApp(this.getApplication(),"appid");
@@ -167,7 +165,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //HashMap<String, String> temp = new HashMap<>();
         //temp.put("account_name", "demoAccount");
         //OpenAdSdk.getInstance().adEvent(this,"ad_create_role", temp);
-        OpenAdSdk.getInstance().adEvent(this,eventName, map);
+
+        HashMap<String, Boolean> channels = new HashMap<>();
+        channels.put(AdConstants.FIREBASE, true);
+        channels.put(AdConstants.FACEBOOK, true);
+        channels.put(AdConstants.APPSFLYER, true);
+        channels.put(AdConstants.TAPJOY, true);
+
+        OpenAdSdk.getInstance().adEvent(this, channels, eventName, map);
 
     }
 

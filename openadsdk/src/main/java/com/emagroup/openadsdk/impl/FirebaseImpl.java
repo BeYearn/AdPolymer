@@ -47,7 +47,7 @@ public class FirebaseImpl extends BaseSdk {
     }
 
     @Override
-    public void adEvent(Activity activity, @NonNull String event, HashMap<String, String> params) {
+    public void adEvent(Activity activity, HashMap<String, Boolean> channels, @NonNull String event, HashMap<String, String> params) {
         try {
             Class<?> aClass = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
             Object instance = aClass.getMethod("getInstance", Context.class).invoke(null, activity);

@@ -127,24 +127,28 @@ public class OpenAdSdk implements AdSdkInterface {
     }
 
     /**
-     *
      * @param activity
-     * @param event 事件名称
-     * @param params 参数 可为null
+     * @param event    事件名称
+     * @param params   参数 可为null
      */
     @Override
-    public void adEvent(Activity activity, String event, HashMap<String, String> params) {
-        if (isFacebook) {
+    public void adEvent(Activity activity, HashMap<String, Boolean> channels, String event, HashMap<String, String> params) {
+        Boolean haveFirebase = channels.get(AdConstants.FIREBASE);
+        Boolean haveFacebook = channels.get(AdConstants.FACEBOOK);
+        Boolean haveAppsflyer = channels.get(AdConstants.APPSFLYER);
+        Boolean haveTapjoy = channels.get(AdConstants.TAPJOY);
+
+        if (isFacebook && haveFacebook) {
             FacebookImpl faceBook = FacebookImpl.getInstance();
-            faceBook.adEvent(activity, event, params);
+            faceBook.adEvent(activity, null, event, params);
         }
-        if (isFirebase) {
-            FirebaseImpl.getInstance().adEvent(activity, event, params);
+        if (isFirebase && haveFirebase) {
+            FirebaseImpl.getInstance().adEvent(activity, null, event, params);
         }
-        if (isAppsflyer) {
-            AppsflyerImpl.getInstance().adEvent(activity, event, params);
+        if (isAppsflyer && haveAppsflyer) {
+            AppsflyerImpl.getInstance().adEvent(activity, null, event, params);
         }
-        if (isTapjoy) {
+        if (isTapjoy && haveTapjoy) {
 
         }
     }

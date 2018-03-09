@@ -39,5 +39,5 @@ public interface AdSdkInterface {
      * @param event
      * @param params
      */
-    void adEvent(Activity activity, String event, HashMap<String, String> params);
+    void adEvent(Activity activity, HashMap<String, Boolean> channels, String event, HashMap<String, String> params);
 }

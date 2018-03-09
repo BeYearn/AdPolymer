@@ -62,7 +62,7 @@ public class TapjoyImpl extends BaseSdk {
     }
 
     @Override
-    public void adEvent(Activity activity, String event, HashMap<String, String> params) {
+    public void adEvent(Activity activity, HashMap<String, Boolean> channels, String event, HashMap<String, String> params) {
 
     }
 }

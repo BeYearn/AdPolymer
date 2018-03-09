@@ -68,7 +68,7 @@ public class FacebookImpl extends BaseSdk {
      * @param params
      */
     @Override
-    public void adEvent(Activity activity, @NonNull String event, HashMap<String, String> params) {
+    public void adEvent(Activity activity,HashMap<String, Boolean> channels, @NonNull String event, HashMap<String, String> params) {
         try {
             Class<?> aClass = Class.forName("com.facebook.appevents.AppEventsLogger");
             Object logger = aClass.getMethod("newLogger", Context.class).invoke(null, activity);
